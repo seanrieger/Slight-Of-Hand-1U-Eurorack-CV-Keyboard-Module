@@ -16,14 +16,26 @@ const int potentiometerPin = A0; // Potentiometer connected to A0
 int buttonState[rows][cols]; // Array to hold the state of each button
 int lastVoltage = 0; // Variable to store the last voltage
 int octaveShift = 0; // Variable to track octave shifts
-int voltageStepPerNote = (4095 / 5) / 12; // Voltage step per note
+int voltageStepPerNote = (int)(4095 * (4.0 / 4.93) / 48); // Voltage step per note for 4 octaves
 
-bool lastHighCButtonState = false; // Variable to store the last state of the high C button
-const unsigned long debounceDelay = 200; // debounce time in milliseconds
-unsigned long lastDebounceTimeMatrix[rows][cols];
-unsigned long lastDebounceTimeOctaveUp = 0;
-unsigned long lastDebounceTimeOctaveDown = 0;
-unsigned long lastDebounceTimeHighC = 0;
+unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+unsigned long debounceDelay = 200;    // the debounce time; increase if the output flickers
+
+// Calibration array with your measured values
+float calibrationValues[] = {
+    // ... include all your measured values here ...
+    0.001, 0.083, 0.167, 0.250, 0.335, 0.418, 0.500, 0.584, 0.668, 0.751, 0.834, 0.916, // C0 to B0
+    0.998, 1.080, 1.163, 1.246, 1.329, 1.412, 1.494, 1.576, 1.668, 1.742, 1.826, 1.909, // C1 to B1
+    1.993, 2.076, 2.159, 2.243, 2.327, 2.409, 2.492, 2.575, 2.660, 2.743, 2.826, 2.909, // C2 to B2
+    2.992, 3.077, 3.158, 3.241, 3.325, 3.407, 3.489, 3.572, 3.656, 3.741, 3.824, 3.907  // C3 to B3
+};
+
+float applyCalibration(int note) {
+    if (note >= 0 && note < sizeof(calibrationValues) / sizeof(calibrationValues[0])) {
+        return calibrationValues[note];
+    }
+    return 0; // Default to 0 if note is out of range
+}
 
 void setup() {
     Wire.begin();
@@ -34,7 +46,6 @@ void setup() {
         pinMode(rowPins[r], INPUT_PULLUP);
         for (int c = 0; c < cols; c++) {
             pinMode(colPins[c], OUTPUT);
-            lastDebounceTimeMatrix[r][c] = 0;
         }
     }
 
@@ -49,21 +60,17 @@ void setup() {
 }
 
 void loop() {
-    unsigned long currentMillis = millis();
-
-    // Debounce for octaveUpPin
-    bool readingOctaveUp = !digitalRead(octaveUpPin);
-    if (readingOctaveUp && (currentMillis - lastDebounceTimeOctaveUp) > debounceDelay) {
-        octaveShift = min(octaveShift + 1, 4);
-        lastDebounceTimeOctaveUp = currentMillis;
+// Check for octave shifts with debounce
+if ((millis() - lastDebounceTime) > debounceDelay) {
+    if (!digitalRead(octaveUpPin)) {
+        octaveShift = min(octaveShift + 1, 3); // Limit to 3 for the highest octave (C3)
+        lastDebounceTime = millis();
     }
-
-    // Debounce for octaveDownPin
-    bool readingOctaveDown = !digitalRead(octaveDownPin);
-    if (readingOctaveDown && (currentMillis - lastDebounceTimeOctaveDown) > debounceDelay) {
-        octaveShift = max(octaveShift - 1, -4);
-        lastDebounceTimeOctaveDown = currentMillis;
+    if (!digitalRead(octaveDownPin)) {
+        octaveShift = max(octaveShift - 1, 0); // Limit to 0 for the lowest octave (C0)
+        lastDebounceTime = millis();
     }
+}
 
     // Read the potentiometer value and set the slew rate
     int potValue = analogRead(potentiometerPin);
@@ -75,32 +82,27 @@ void loop() {
 
         for (int r = 0; r < rows; r++) {
             bool currentButtonState = !digitalRead(rowPins[r]);
-            if (currentButtonState && !buttonState[r][c] && (currentMillis - lastDebounceTimeMatrix[r][c]) > debounceDelay) {
-                // Button logic here...
+
+            if (currentButtonState && buttonState[r][c] != currentButtonState) {
                 digitalWrite(triggerPin, HIGH);
                 delay(5); // Pulse width, adjust as needed
                 digitalWrite(triggerPin, LOW);
 
-                int note = r * cols + c;
-                int targetVoltage = note * voltageStepPerNote;
-                targetVoltage += (4095 / 5) * octaveShift;
-                targetVoltage = constrain(targetVoltage, 0, 4095);
+                int note = r * cols + c + octaveShift * 12;
+                float targetVoltage = applyCalibration(note);
 
-                // Implementing the slew
                 if (slewRate > 0) {
                     int timePerStep = slewRate / 12;
-                    while (lastVoltage != targetVoltage) {
-                        if (lastVoltage < targetVoltage) lastVoltage++;
-                        else if (lastVoltage > targetVoltage) lastVoltage--;
+                    while (lastVoltage != (int)(targetVoltage * (4095 / 4.93))) {
+                        if (lastVoltage < (int)(targetVoltage * (4095 / 4.93))) lastVoltage++;
+                        else if (lastVoltage > (int)(targetVoltage * (4095 / 4.93))) lastVoltage--;
                         dac.setVoltage(lastVoltage, false);
-                        delay(timePerStep); // Delay based on calculated time per step
+                        delay(timePerStep);
                     }
                 } else {
-                    lastVoltage = targetVoltage;
+                    lastVoltage = (int)(targetVoltage * (4095 / 4.93));
                     dac.setVoltage(lastVoltage, false);
                 }
-
-                lastDebounceTimeMatrix[r][c] = currentMillis;
             }
             buttonState[r][c] = currentButtonState;
         }
@@ -108,34 +110,29 @@ void loop() {
         digitalWrite(colPins[c], HIGH);
     }
 
-    // Debounce logic for highCButton
-    bool highCButtonState = !digitalRead(highCButton);
-    if (highCButtonState && !lastHighCButtonState && (currentMillis - lastDebounceTimeHighC) > debounceDelay) {
-        // High C button logic here...
-        digitalWrite(triggerPin, HIGH);
-        delay(5); // Pulse width, adjust as needed
-        digitalWrite(triggerPin, LOW);
+  // High C button logic with debounce
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+      bool highCButtonState = !digitalRead(highCButton);
+      if (highCButtonState) {
+          digitalWrite(triggerPin, HIGH);
+          delay(5); // Pulse width, adjust as needed
+          digitalWrite(triggerPin, LOW);
 
-        int note = 12; // 13th note (high C)
-        int targetVoltage = note * voltageStepPerNote;
-        targetVoltage += (4095 / 5) * octaveShift;
-        targetVoltage = constrain(targetVoltage, 0, 4095);
+          float targetVoltage;
+          if (octaveShift == 3) {
+              // If we are in the top octave, set High C to play C4 (4 volts)
+              targetVoltage = 4.0;
+          } else {
+              // Otherwise, play the High C note for the current octave
+              int note = 12 + octaveShift * 12; // High C note
+              targetVoltage = applyCalibration(note);
+          }
 
-        // Implementing the slew for high C
-        if (slewRate > 0) {
-            int timePerStep = slewRate / 12;
-            while (lastVoltage != targetVoltage) {
-                if (lastVoltage < targetVoltage) lastVoltage++;
-                else if (lastVoltage > targetVoltage) lastVoltage--;
-                dac.setVoltage(lastVoltage, false);
-                delay(timePerStep);
-            }
-        } else {
-            lastVoltage = targetVoltage;
-            dac.setVoltage(lastVoltage, false);
-        }
+          lastVoltage = (int)(targetVoltage * (4095 / 4.93));
+          dac.setVoltage(lastVoltage, false);
 
-        lastDebounceTimeHighC = currentMillis;
-    }
-    lastHighCButtonState = highCButtonState;
+          lastDebounceTime = millis();
+      }
+  }
+
 }
