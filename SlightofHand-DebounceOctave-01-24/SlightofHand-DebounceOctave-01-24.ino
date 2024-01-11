@@ -19,7 +19,7 @@ int octaveShift = 0; // Variable to track octave shifts
 int voltageStepPerNote = (int)(4095 * (4.0 / 4.93) / 48); // Voltage step per note for 4 octaves
 
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 200;    // the debounce time; increase if the output flickers
+unsigned long debounceDelay = 90;    // the debounce time; increase if the output flickers
 unsigned long lastDebounceTimeMatrix[rows][cols]; // Array to store the last debounce time for each matrix button
 
 bool lastHighCButtonState = false; // Variable to track the last state of the high C button
