@@ -23,22 +23,23 @@ Confirmation: The module indicates entry into Calibration Mode by setting the tr
 
 <em>Confirming Selection:</em> Press the High C button to confirm the selection. This action activates the potentiometer for calibration adjustment.
 
-Adjusting Calibration: Turn the potentiometer to adjust the voltage for the selected note. The adjustment range is limited to one half-step above and below the default voltage for finer control. The current adjusted voltage will be displayed on the serial monitor.
+<em>Adjusting Calibration:</em> Turn the potentiometer to adjust the voltage for the selected note. The adjustment range is limited to one half-step above and below the default voltage for finer control. The current adjusted voltage will be displayed on the serial monitor.
 
-Saving Calibration: Release the High C button to save the adjusted voltage. The new calibration value is stored in EEPROM, ensuring persistence across power cycles.
+<em>Saving Calibration:</em> Release the High C button to save the adjusted voltage. The new calibration value is stored in EEPROM, ensuring persistence across power cycles.
 
-Special Note Handling
-High C (C4): In the highest octave (Octave 3), High C is set to a fixed voltage (e.g., 3.95V). In other octaves, its voltage is based on the calibration values.
+<h3>Special Note Handling</h3>
+High C (C4): In the highest octave (Octave 3), High C is set to a fixed voltage (e.g., 3.97V). In other octaves, its voltage is based on the calibration values.
 
-Resetting to Default Calibration Values
+<h3>Resetting to Default Calibration Values</h3>
 Initiate Reset: While in Calibration Mode, press and hold the "Octave Down" button for 8 seconds without pressing the "Octave Up" button.
 
-Confirmation: The module confirms the reset by blinking the trigger output 6 times. A message "Calibration values reset to defaults" will be displayed on the serial monitor. All notes are reset to their default calibration values.
+<em>Confirmation:</em> The module confirms the reset by blinking the trigger output 6 times. A message "Calibration values reset to defaults" will be displayed on the serial monitor. All notes are reset to their default calibration values.
 
-Exiting Calibration Mode
-Exit: Press and hold both the "Octave Up" and "Octave Down" buttons simultaneously for 2 seconds. The module exits Calibration Mode, indicated by the trigger output set to LOW and a message "Exiting Calibration Mode" displayed on the serial monitor.
-Notes
-Calibration Mode is designed for precision tuning. It is recommended to use a reliable voltage reference or tuner for accurate calibration.
-Be cautious while adjusting calibration values, especially for the lower and upper voltage limits.
+<h3>Exiting Calibration Mode</h3>
+<em></em>Exit:</em> Press and hold both the "Octave Up" and "Octave Down" buttons simultaneously for 2 seconds. The module exits Calibration Mode, indicated by the trigger output set to LOW and a message "Exiting Calibration Mode" displayed on the serial monitor.
+
+<h3>Notes</h3>
+<p>Calibration Mode is designed for precision tuning. It is recommended to use a reliable voltage reference or tuner for accurate calibration.</p>
+<p>Be cautious while adjusting calibration values, especially for the lower and upper voltage limits.
 Always confirm your adjustments before exiting Calibration Mode to ensure the
-desired tuning is achieved.
+desired tuning is achieved.</p>
