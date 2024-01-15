@@ -40,17 +40,17 @@ const int EEPROM_SIGNATURE_VALUE = 12345;
 
 // Default calibration values
 float defaultCalibrationValues[48] = {
-    // Your default calibration values go here
-    0.001, 0.083, 0.167, 0.250, 0.335, 0.418, 0.500, 0.584, 0.668, 0.751, 0.834, 0.916, // C0 to B0
-    0.998, 1.080, 1.163, 1.246, 1.329, 1.412, 1.494, 1.576, 1.668, 1.742, 1.826, 1.909, // C1 to B1
-    1.998, 2.076, 2.159, 2.243, 2.327, 2.409, 2.492, 2.575, 2.660, 2.743, 2.826, 2.909, // C2 to B2
-    2.992, 3.077, 3.158, 3.241, 3.325, 3.407, 3.489, 3.572, 3.656, 3.741, 3.824, 3.907  // C3 to B3
+  // Your default calibration Real World Values, Load in perfect world values, and then measure real world voltages then add here and activate
+  //  0.001, 0.083, 0.167, 0.250, 0.335, 0.418, 0.500, 0.584, 0.668, 0.751, 0.834, 0.916, // C0 to B0
+  //  0.998, 1.080, 1.163, 1.246, 1.329, 1.412, 1.494, 1.576, 1.668, 1.742, 1.826, 1.909, // C1 to B1
+  //  1.998, 2.076, 2.159, 2.243, 2.327, 2.409, 2.492, 2.575, 2.660, 2.743, 2.826, 2.909, // C2 to B2
+  //  2.992, 3.077, 3.158, 3.241, 3.325, 3.407, 3.489, 3.572, 3.656, 3.741, 3.824, 3.907  // C3 to B3
    
   //Default Eurorack Values - Perfect world
-  //  0.000, 0.083, 0.167, 0.250, 0.333, 0.417, 0.500, 0.583, 0.667, 0.750, 0.833, 0.917, // C0 to B0
-  //  1.000, 1.083, 1.167, 1.250, 1.333, 1.417, 1.500, 1.583, 1.667, 1.750, 1.833, 1.917, // C1 to B1
-  //  2.000, 2.083, 2.167, 2.250, 2.333, 2.417, 2.500, 2.583, 2.667, 2.750, 2.833, 2.917, // C2 to B2
-  //  3.000, 3.083, 3.167, 3.250, 3.333, 3.417, 3.500, 3.583, 3.667, 3.750, 3.833, 3.917,  // C3 to B3
+    0.000, 0.083, 0.167, 0.250, 0.333, 0.417, 0.500, 0.583, 0.667, 0.750, 0.833, 0.917, // C0 to B0
+    1.000, 1.083, 1.167, 1.250, 1.333, 1.417, 1.500, 1.583, 1.667, 1.750, 1.833, 1.917, // C1 to B1
+    2.000, 2.083, 2.167, 2.250, 2.333, 2.417, 2.500, 2.583, 2.667, 2.750, 2.833, 2.917, // C2 to B2
+    3.000, 3.083, 3.167, 3.250, 3.333, 3.417, 3.500, 3.583, 3.667, 3.750, 3.833, 3.917,  // C3 to B3
 };
 
 void blinkTriggerPulse(int count, int duration) {
@@ -249,7 +249,7 @@ if (inCalibrationMode) {
             digitalWrite(triggerPin, HIGH);
             delay(5); // Pulse width, adjust as needed
             digitalWrite(triggerPin, LOW);
-            float targetVoltage = (octaveShift == 3) ? 3.94 : applyCalibration(12 + octaveShift * 12);
+            float targetVoltage = (octaveShift == 3) ? 3.97 : applyCalibration(12 + octaveShift * 12);
     if (slewRate > 0) {
     int timePerStep = slewRate / 12;
     while (lastVoltage != (int)(targetVoltage * (4095 / 4.93))) {
