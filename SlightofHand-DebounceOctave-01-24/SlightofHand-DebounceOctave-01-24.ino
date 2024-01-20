@@ -129,77 +129,78 @@ void loop() {
         }
     }
 
-// BEGIN CALIBRATION MODE - User enters mode by holding both octave buttons for 2 seconds
+    if (inCalibrationMode) {
+        // Enter calibration mode
+        for (int c = 0; c < cols; c++) {
+            digitalWrite(colPins[c], LOW);
 
-if (inCalibrationMode) {
-    // Enter calibration mode
-    for (int c = 0; c < cols; c++) {
-        digitalWrite(colPins[c], LOW);
+            for (int r = 0; r < rows; r++) {
+                bool currentButtonState = !digitalRead(rowPins[r]);
+                if (currentButtonState && !buttonState[r][c]) {
+                    // Note selection logic
+                    selectedNoteIndex = r * cols + c + octaveShift * 12;
+                    Serial.print("Note selected for calibration: ");
+                    Serial.println(selectedNoteIndex);
 
-        for (int r = 0; r < rows; r++) {
-            bool currentButtonState = !digitalRead(rowPins[r]);
-            if (currentButtonState && !buttonState[r][c]) {
-                // Note selection logic
-                selectedNoteIndex = r * cols + c + octaveShift * 12;
-                Serial.print("Note selected for calibration: ");
-                Serial.println(selectedNoteIndex);
-                Serial.println("Press High C to confirm and adjust.");
+                    // Output the current voltage for the selected note immediately
+                    float currentVoltage = calibrationValues[selectedNoteIndex];
+                    dac.setVoltage((int)(currentVoltage * (4095 / 4.93)), false);
+
+                    Serial.println("Press High C to confirm and adjust.");
+                }
+                buttonState[r][c] = currentButtonState;
             }
-            buttonState[r][c] = currentButtonState;
+
+            digitalWrite(colPins[c], HIGH);
         }
 
-        digitalWrite(colPins[c], HIGH);
-    }
+        // High C button serves as the "enter key" for calibration
+        bool highCButtonState = !digitalRead(highCButton);
+        if (highCButtonState && selectedNoteIndex != -1 && selectedNoteIndex != 48) {
+            // Calibration logic for the selected note
+            float defaultVoltage = defaultCalibrationValues[selectedNoteIndex]; // Load default voltage
+            float adjustmentRange = 1.0 / 12.0; // One half-step range
+            float potAdjustment = (analogRead(potentiometerPin) / 1023.0) * adjustmentRange - (adjustmentRange / 2.0);
+            float currentVoltage = defaultVoltage + potAdjustment;
 
-    // High C button serves as the "enter key" for calibration
-    bool highCButtonState = !digitalRead(highCButton);
-    if (highCButtonState && selectedNoteIndex != -1 && selectedNoteIndex != 48) {
-        // Calibration logic for the selected note
-        float defaultVoltage = defaultCalibrationValues[selectedNoteIndex]; // Load default voltage
-        float adjustmentRange = 1.0 / 12.0; // One half-step range
-        float potAdjustment = (analogRead(potentiometerPin) / 1023.0) * adjustmentRange - (adjustmentRange / 2.0);
-        float currentVoltage = defaultVoltage + potAdjustment;
+            // Apply voltage range limits for C0 and High C3
+            if (selectedNoteIndex == 0) { // For C0, limit to 0V at the lowest
+                currentVoltage = max(currentVoltage, 0.0f);
+            } else if (selectedNoteIndex == 48) { // For High C3, limit to 4V at the highest
+                currentVoltage = min(currentVoltage, 4.0f);
+            }
 
-        // Apply voltage range limits for C0 and High C3
-        if (selectedNoteIndex == 0) { // For C0, limit to 0V at the lowest
-            currentVoltage = max(currentVoltage, 0.0f);
-        } else if (selectedNoteIndex == 48) { // For High C3, limit to 4V at the highest
-            currentVoltage = min(currentVoltage, 4.0f);
+            Serial.print("Note Index: ");
+            Serial.print(selectedNoteIndex);
+            Serial.print(", Adjusted Voltage: ");
+            Serial.println(currentVoltage);
+
+            calibrationValues[selectedNoteIndex] = currentVoltage; // Update calibration value
+            dac.setVoltage((int)(currentVoltage * (4095 / 4.93)), false); // Output adjusted voltage to DAC
+            EEPROM.put(EEPROM_CALIBRATION_START_ADDR + selectedNoteIndex * sizeof(float), calibrationValues[selectedNoteIndex]);
+
+            selectedNoteIndex = -1; // Reset the selected note index
         }
 
-        Serial.print("Note Index: ");
-        Serial.print(selectedNoteIndex);
-        Serial.print(", Adjusted Voltage: ");
-        Serial.println(currentVoltage);
-
-        calibrationValues[selectedNoteIndex] = currentVoltage; // Update calibration value
-        dac.setVoltage((int)(currentVoltage * (4095 / 4.93)), false); // Output adjusted voltage to DAC
-        EEPROM.put(EEPROM_CALIBRATION_START_ADDR + selectedNoteIndex * sizeof(float), calibrationValues[selectedNoteIndex]);
-
-        selectedNoteIndex = -1; // Reset the selected note index
-    }
-
-    // Check if the down octave button is held down for 8 seconds to reset calibration
-    if (!digitalRead(octaveDownPin) && digitalRead(octaveUpPin)) {
-        if (downOctaveButtonPressTime == 0) { // If the timer is not already running
-            downOctaveButtonPressTime = millis(); // Start the timer
-        } else if (millis() - downOctaveButtonPressTime > 8000) { // Check if 8 seconds have passed
-            // Reset calibration values to defaults
-            memcpy(calibrationValues, defaultCalibrationValues, sizeof(defaultCalibrationValues));
-            for (int i = 0; i < sizeof(calibrationValues) / sizeof(calibrationValues[0]); i++) {
-                EEPROM.put(EEPROM_CALIBRATION_START_ADDR + i * sizeof(float), calibrationValues[i]);
+        // Check if the down octave button is held down for 8 seconds to reset calibration
+        if (!digitalRead(octaveDownPin) && digitalRead(octaveUpPin)) {
+            if (downOctaveButtonPressTime == 0) { // If the timer is not already running
+                downOctaveButtonPressTime = millis(); // Start the timer
+            } else if (millis() - downOctaveButtonPressTime > 8000) { // Check if 8 seconds have passed
+                // Reset calibration values to defaults
+                memcpy(calibrationValues, defaultCalibrationValues, sizeof(defaultCalibrationValues));
+                for (int i = 0; i < sizeof(calibrationValues) / sizeof(calibrationValues[0]); i++) {
+                    EEPROM.put(EEPROM_CALIBRATION_START_ADDR + i * sizeof(float), calibrationValues[i]);
+                }
+                Serial.println("Calibration values reset to defaults.");
+                blinkTriggerPulse(6, 250); // Blink the trigger pulse for confirmation
+                downOctaveButtonPressTime = 0; // Reset the timer
             }
-            Serial.println("Calibration values reset to defaults.");
-            blinkTriggerPulse(6, 250); // Blink the trigger pulse for confirmation
-            downOctaveButtonPressTime = 0; // Reset the timer
+        } else {
+            downOctaveButtonPressTime = 0; // Reset the timer if the button is released
         }
     } else {
-        downOctaveButtonPressTime = 0; // Reset the timer if the button is released
-    }
-
-
-    } else {
-       // ... Normal operation logic ...
+        // Normal operation logic
         int potValue = analogRead(potentiometerPin);
         int slewRate = (potValue < 5) ? 0 : map(potValue, 5, 1023, 1, 30);
 
@@ -242,36 +243,36 @@ if (inCalibrationMode) {
             digitalWrite(colPins[c], HIGH);
         }
 
-    // High C button logic
-    if ((millis() - lastDebounceTimeNotes) > debounceDelayNoteButtons) {
-        bool highCButtonState = !digitalRead(highCButton);
-        if (highCButtonState && !lastHighCButtonState) {
-            digitalWrite(triggerPin, HIGH);
-            delay(5); // Pulse width, adjust as needed
-            digitalWrite(triggerPin, LOW);
-            float targetVoltage = (octaveShift == 3) ? 3.97 : applyCalibration(12 + octaveShift * 12);
-    if (slewRate > 0) {
-    int timePerStep = slewRate / 12;
-    while (lastVoltage != (int)(targetVoltage * (4095 / 4.93))) {
-    if (lastVoltage < (int)(targetVoltage * (4095 / 4.93))) lastVoltage++;
-    else if (lastVoltage > (int)(targetVoltage * (4095 / 4.93))) lastVoltage--;
-    dac.setVoltage(lastVoltage, false);
-    delay(timePerStep);
-    }
-    } else {
-    lastVoltage = (int)(targetVoltage * (4095 / 4.93));
-    dac.setVoltage(lastVoltage, false);
-    }
-            lastDebounceTimeNotes = millis();
+        // High C button logic
+        if ((millis() - lastDebounceTimeNotes) > debounceDelayNoteButtons) {
+            bool highCButtonState = !digitalRead(highCButton);
+            if (highCButtonState && !lastHighCButtonState) {
+                digitalWrite(triggerPin, HIGH);
+                delay(5); // Pulse width, adjust as needed
+                digitalWrite(triggerPin, LOW);
+                float targetVoltage = (octaveShift == 3) ? 3.97 : applyCalibration(12 + octaveShift * 12);
+                if (slewRate > 0) {
+                    int timePerStep = slewRate / 12;
+                    while (lastVoltage != (int)(targetVoltage * (4095 / 4.93))) {
+                        if (lastVoltage < (int)(targetVoltage * (4095 / 4.93))) lastVoltage++;
+                        else if (lastVoltage > (int)(targetVoltage * (4095 / 4.93))) lastVoltage--;
+                        dac.setVoltage(lastVoltage, false);
+                        delay(timePerStep);
+                    }
+                } else {
+                    lastVoltage = (int)(targetVoltage * (4095 / 4.93));
+                    dac.setVoltage(lastVoltage, false);
+                }
+                lastDebounceTimeNotes = millis();
+            }
+            lastHighCButtonState = highCButtonState;
         }
-        lastHighCButtonState = highCButtonState;
     }
-}
 }
 
 float applyCalibration(int note) {
-if (note >= 0 && note < sizeof(calibrationValues) / sizeof(calibrationValues[0])) {
-return calibrationValues[note];
-}
-return 0; // Default to 0 if note is out of range
+    if (note >= 0 && note < sizeof(calibrationValues) / sizeof(calibrationValues[0])) {
+        return calibrationValues[note];
+    }
+    return 0; // Default to 0 if note is out of range
 }
