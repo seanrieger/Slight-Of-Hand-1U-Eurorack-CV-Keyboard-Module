@@ -12,6 +12,8 @@
 
 <H2>Calibration Mode</H2>
 <h3>Overview</h3>
+<p>Note: All modules come pre-calibrated (every note across 4 octaves)  to the closest 100th of a volt. Most users will never need to calibrate it, but should you choose to, the following procedure is how it is done:</p>
+
 <p>The Eurorack CV Keyboard Module features a Calibration Mode that allows users to fine-tune the voltage output for each note, ensuring precise pitch control. This mode is particularly useful for adjusting the module to align with specific musical tuning requirements or to compensate for hardware variances.</p>
 
 <h3>Entering Calibration Mode</h3>
