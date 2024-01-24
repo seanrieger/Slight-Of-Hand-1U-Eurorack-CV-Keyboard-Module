@@ -1,5 +1,5 @@
 <H1>Slight Of Hand</H1>
-<P>This is a 1u (Intellijel format) Eurorack module that functions as a monophonic CV keyboard. <p>It's a play on words of the phrase "Sleight of hand" due to its "slight" footprint.</p><p>It's designed to be extremely playable with responsive, light touch, tactile switches for the keys, a wide portamento/slew range which is adjustablen in realtime, as well as octave up and down buttons. The Slight OF Hand outputs 1 volt per octave out of its CV out jack and a 5 volt trigger pulse out of the trigger jack, so it can easily be connected to an AR envelope.</P>
+<P>This is a 1u (Intellijel format) Eurorack module that functions as a monophonic CV keyboard. <p>It's a play on words of the phrase "Sleight of hand" due to its "slight" footprint.</p><p>It's designed to be extremely playable with responsive, light touch, tactile switches for the keys, a wide portamento/slew range which is adjustablen in realtime, as well as octave up and down buttons.</p><p>The Slight OF Hand outputs 1 volt per octave out of its CV out jack and a 5 volt trigger pulse out of the trigger jack, so it can easily be connected to an AR envelope.</P>
 <h2>Features</H2>
   <ul>
   <li>Light touch, tactile switch keyboard that covers one octave + one note (Low C & high C)</li>
