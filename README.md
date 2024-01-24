@@ -11,6 +11,7 @@
   <li> User-friendly calibration mode with tuning for each note across 4 octaves & EEPROM memory</li>
   </ul>
 
+![IMG_1540](https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/assets/8561196/5dabd7d8-bc2f-4699-bec2-8ccc39dbeeba)
 
 <H2>Calibration Mode</H2>
 <h3>Overview</h3>
