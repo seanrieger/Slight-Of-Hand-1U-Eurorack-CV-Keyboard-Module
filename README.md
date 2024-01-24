@@ -20,14 +20,14 @@
 
 <h3>Entering Calibration Mode</h3>
 <P>Initiate Calibration Mode: Press and hold both the "Octave Up" and "Octave Down" buttons simultaneously for 2 seconds.
-Confirmation: The module indicates entry into Calibration Mode by setting the trigger output to HIGH. A message "Entering Calibration Mode" will also be displayed on the serial monitor.</P>
+Confirmation: The module indicates entry into Calibration Mode by setting the trigger output to HIGH. A message "Entering Calibration Mode" will also be displayed on the serial monitor if connected ti Arduino IDE.</P>
 
 <H3>Calibration Process</H3>
 <p>Selecting a Note: Press any note button (except High C) to select it for calibration. The selected note index will be displayed on the serial monitor with a prompt to press High C to confirm and adjust.</p>
 
 <em>Confirming Selection:</em> Press the High C button to confirm the selection. This action activates the potentiometer for calibration adjustment.
 
-<em>Adjusting Calibration:</em> Turn the potentiometer to adjust the voltage for the selected note. The adjustment range is limited to one half-step above and below the default voltage for finer control. The current adjusted voltage will be displayed on the serial monitor.
+<em>Adjusting Calibration:</em> Turn the potentiometer to adjust the voltage for the selected note. The adjustment range is limited to one full-step above and below the default voltage for finer control. The current adjusted voltage will be displayed on the serial monitor if connected to Arduino IDE.
 
 <em>Saving Calibration:</em> Release the High C button to save the adjusted voltage. The new calibration value is stored in EEPROM, ensuring persistence across power cycles.
 
@@ -37,7 +37,7 @@ High C (C4): Because the calibration mode uses the high C button on the keyboard
 <h3>Resetting to Default Calibration Values</h3>
 Initiate Reset: While in Calibration Mode, press and hold the "Octave Down" button for 8 seconds without pressing the "Octave Up" button.
 
-<em>Confirmation:</em> The module confirms the reset by blinking the trigger output 6 times. A message "Calibration values reset to defaults" will be displayed on the serial monitor. All notes are reset to their default calibration values.
+<em>Confirmation:</em> The module confirms the reset by blinking the trigger output 6 times. A message "Calibration values reset to defaults" will be displayed on the serial monitor of Arduino IDE if connected. All notes are reset to their default calibration values.
 
 <h3>Exiting Calibration Mode</h3>
 <em></em>Exit:</em> Press and hold both the "Octave Up" and "Octave Down" buttons simultaneously for 2 seconds. The module exits Calibration Mode, indicated by the trigger output set to LOW and a message "Exiting Calibration Mode" displayed on the serial monitor.
