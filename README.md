@@ -32,7 +32,7 @@ Confirmation: The module indicates entry into Calibration Mode by setting the tr
 <em>Saving Calibration:</em> Release the High C button to save the adjusted voltage. The new calibration value is stored in EEPROM, ensuring persistence across power cycles.
 
 <h3>Special Note Handling</h3>
-High C (C4): In the highest octave (Octave 3), High C is set to a fixed voltage (e.g., 3.97V). In other octaves, its voltage is based on the calibration values.
+High C (C4): Because the calibration mode uses the high C button on the keyboard as a "shift" button to confirm editing a pitch, the calibration of the final high C4 note is handled differently.  When in calibration mode, the octave buttons will allow the keyboard to shift up one additional octave, forcing C4 into the low C key for tuning.  No other pitches in that octave will be calibrated, but this allows for calibration of the final high C4.
 
 <h3>Resetting to Default Calibration Values</h3>
 Initiate Reset: While in Calibration Mode, press and hold the "Octave Down" button for 8 seconds without pressing the "Octave Up" button.
