@@ -37,39 +37,44 @@ int totalSlewTime = 0;        // Added here as a global variable
 int targetVoltageRaw;         // Target voltage in DAC raw value
 int stepDirection;            // 1 for increasing voltage, -1 for decreasing
 
-//BEGIN SLEW 
-void startSlew(float targetVoltage, int totalSlewTime) {
-  targetVoltageRaw = (int)(targetVoltage * (4095 / 4.93));
-  int totalVoltageDiff = abs(lastVoltage - targetVoltageRaw);
+//BEGIN SLEW FUNCTIONS ||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  if (totalVoltageDiff > 0 && totalSlewTime > 0) {
-    isSlewing = true;
-    slewStartTime = millis();
-    slewStepTime = totalSlewTime / totalVoltageDiff;
-    stepDirection = (targetVoltageRaw > lastVoltage) ? 1 : -1;  // Determine direction of change
-  } else {
-    // If no slew needed or immediate change required
-    lastVoltage = targetVoltageRaw;
-    dac.setVoltage(lastVoltage, false);
-    isSlewing = false;  // Ensure slew flag is reset if no slew action is needed
-  }
+void startSlew(float targetVoltage, unsigned long totalSlewTime) {
+    targetVoltageRaw = (int)(targetVoltage * (4095 / 4.93));
+    int totalVoltageDiff = abs(lastVoltage - targetVoltageRaw);
+
+    if (totalVoltageDiff > 0 && totalSlewTime > 0) {
+        isSlewing = true;
+        slewStartTime = micros(); // Use micros() for timing
+        // Ensure slewStepTime is calculated to work with microseconds
+        // Protect against division by zero by ensuring totalVoltageDiff is not zero
+        slewStepTime = totalVoltageDiff > 0 ? totalSlewTime / totalVoltageDiff : totalSlewTime;
+        stepDirection = (targetVoltageRaw > lastVoltage) ? 1 : -1;  // Determine direction of change
+    } else {
+        // If no slew needed or immediate change required
+        lastVoltage = targetVoltageRaw;
+        dac.setVoltage(lastVoltage, false);
+        isSlewing = false;  // Ensure slew flag is reset if no slew action is needed
+    }
 }
 
 // UPDATE SLEW so it can be interrupted by another note press
 void updateSlew() {
-  if (isSlewing) {
-    unsigned long currentTime = millis();
-    if (currentTime - slewStartTime >= slewStepTime) {
-      lastVoltage += stepDirection;
-      dac.setVoltage(lastVoltage, false);
-      slewStartTime = currentTime;  // Reset timing for the next step
+    if (isSlewing) {
+        unsigned long currentTime = micros(); // Use micros() for timing
+        if (currentTime - slewStartTime >= slewStepTime) {
+            lastVoltage += stepDirection;
+            dac.setVoltage(lastVoltage, false);
+            slewStartTime = currentTime;  // Reset timing for the next step
 
-      if (lastVoltage == targetVoltageRaw) {
-        isSlewing = false;  // Slew complete
-      }
+            if (lastVoltage == targetVoltageRaw) {
+                isSlewing = false;  // Slew complete
+            }
+        }
     }
-  }
 }
+
+
 
 bool lastHighCButtonState = false;
 bool inCalibrationMode = false;
@@ -77,7 +82,6 @@ bool calibrationModeToggleAcknowledged = false;
 
 // Create a 2D array to hold the last state of each button
 bool lastButtonState[rows][cols];
-
 float calibrationValues[49];
 
 const int EEPROM_SIGNATURE_ADDR = 0;
@@ -148,6 +152,9 @@ void setup() {
 //BEGIN THE LOOP ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 void loop() {
+  // Call updateSlew to continuously update the voltage without blocking
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
+
   // Check for calibration mode toggle
   if (!digitalRead(octaveUpPin) && !digitalRead(octaveDownPin)) {
     if (millis() - lastCalibrationButtonPressTime > 2000 && !calibrationModeToggleAcknowledged) {
@@ -160,6 +167,7 @@ void loop() {
     lastCalibrationButtonPressTime = millis();
     calibrationModeToggleAcknowledged = false;
   }
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
 
   // Handle octave buttons
   if ((millis() - lastDebounceTimeOctave) > debounceDelayOctaveButtons) {
@@ -172,9 +180,7 @@ void loop() {
       lastDebounceTimeOctave = millis();
     }
   }
-
-  // Call updateSlew to continuously update the voltage without blocking
-  updateSlew();
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
 
   // Calibration mode handling
   if (inCalibrationMode) {
@@ -199,6 +205,8 @@ void loop() {
       digitalWrite(colPins[c], HIGH);
     }
 
+    //updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
+
     // High C button serves as the "enter key" for calibration
     bool highCButtonState = !digitalRead(highCButton);
     if (highCButtonState && selectedNoteIndex != -1) {
@@ -219,6 +227,7 @@ void loop() {
 
       selectedNoteIndex = -1;
     }
+    //updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
 
     // Check if the down octave button is held down for 8 seconds to reset calibration
     if (!digitalRead(octaveDownPin) && digitalRead(octaveUpPin)) {
@@ -238,25 +247,24 @@ void loop() {
     }
   } else {
 
+  updateSlew();
     // Normal operation logic ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-    // int potValue = analogRead(potentiometerPin);
-    // int totalSlewTime = (potValue < 2) ? 0 : map(potValue, 2, 1023, 1, 2000);
-
-// Read the potentiometer value
+// // Read the potentiometer value
     int potValue = analogRead(potentiometerPin);
 
-    // Normalize the potentiometer value to a 0-1 range
-    float normalizedValue = potValue / 1023.0;
+// Normalize the potentiometer value to a 0-1 range
+float normalizedValue = potValue / 1023.0;
 
-    // Apply an exponential curve (e.g., using the cube of the normalized value)
-    float exponentialValue = pow(normalizedValue, 2); // Adjust the exponent as needed
+// Apply an exponential curve (e.g., using the square of the normalized value)
+// Adjusting the exponent if needed based on desired response curve
+float exponentialValue = pow(normalizedValue, 2); // This example squares the value
 
-    // Scale the exponential value back to the desired range for totalSlewTime
-    // This example uses a cube, which makes the response more exponential
-    int totalSlewTime = (potValue < 2) ? 0 : map(exponentialValue * 1023, 2, 1023, 1, 2000);
+// Scale the exponential value back to the desired range for totalSlewTime in microseconds
+// Adjust the range as needed for your application
+unsigned long totalSlewTime = (potValue < 2) ? 0 : map(exponentialValue * 1023, 0, 1023, 1, 2000000);
 
-
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
 
     bool isAnyButtonPressed = false;  // Track if any note button is pressed
 
@@ -271,6 +279,8 @@ void loop() {
           if (currentMillis - lastDebounceTimeMatrix[r][c] > debounceDelayNoteButtons) {
             // Button state has changed and debounced
             lastButtonState[r][c] = currentButtonState;  // Update the button state
+
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX MAYBE?
 
             if (currentButtonState) {
               // Button has been pressed
@@ -292,6 +302,8 @@ void loop() {
       digitalWrite(colPins[c], HIGH);
     }
 
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
+
     // Debounce logic for High C button
     bool highCButtonState = !digitalRead(highCButton);
     unsigned long currentMillis = millis();
@@ -300,6 +312,8 @@ void loop() {
       // High C button state has changed and debounced
       lastHighCButtonState = highCButtonState;  // Update last button state
       lastDebounceTimeNotes = currentMillis;    // Reset the debounce timer
+
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX MAYBE?
 
       if (highCButtonState) {
         // High C button has been pressed
@@ -320,6 +334,8 @@ void loop() {
         }
       }
     }
+    updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
+
 
     // Unified Gate control logic
     if (isAnyButtonPressed || highCButtonState) {
@@ -328,7 +344,9 @@ void loop() {
       digitalWrite(triggerPin, LOW);
     }
   }
+      updateSlew(); //XXXXXXXXXXXXXXXXXXXXXX
 }
+
 
 
 float applyCalibration(int note) {
