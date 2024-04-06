@@ -211,7 +211,14 @@ void loop() {
     bool highCButtonState = !digitalRead(highCButton);
     if (highCButtonState && selectedNoteIndex != -1) {
       float defaultVoltage = defaultCalibrationValues[selectedNoteIndex];
-      float adjustmentRange = 1.0 / 6.0;
+      
+      //Whole Step Adjustment Range 
+      // float adjustmentRange = 1.0 / 6.0;
+      // float potAdjustment = (analogRead(potentiometerPin) / 1023.0) * adjustmentRange - (adjustmentRange / 2.0);
+      // float currentVoltage = defaultVoltage + potAdjustment;
+
+      //Whole plus Half Step Adjustment Range
+      float adjustmentRange = 1.0 / 4.0; // Updated to reflect a larger adjustment range
       float potAdjustment = (analogRead(potentiometerPin) / 1023.0) * adjustmentRange - (adjustmentRange / 2.0);
       float currentVoltage = defaultVoltage + potAdjustment;
 
