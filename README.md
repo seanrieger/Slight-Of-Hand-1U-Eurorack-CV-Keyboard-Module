@@ -48,3 +48,5 @@ Initiate Reset: While in Calibration Mode, press and hold the "Octave Down" butt
 <p>Be cautious while adjusting calibration values, especially for the lower and upper voltage limits.
 Always confirm your adjustments before exiting Calibration Mode to ensure the
 desired tuning is achieved.</p>
+
+Check the Wiki for More Info: https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/wiki
