@@ -1,4 +1,4 @@
-er<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -13,14 +13,16 @@ er<!DOCTYPE html>
 <h1>
    FlatSix Modular Firmaware Uploader 
   </h1>
-	<p>This is a firmware uploaded for arduino-based modules such as Slight Of Hand. It works in Chrome on a Mac or PC.&nbsp;&nbsp;</p>
+	<p>This is a firmware uploaded for arduino-based modules such as Slight Of Hand. It only works in Chrome on a Mac or PC.&nbsp;&nbsp;</p>
 	<ol>
 	  <li>Make sure to unplug your module from the eurorack power cable first!</li>
 	  <li>Plug in your USB cable to the mini usb port on the Slight Of Hand</li>
-	  <li>&nbsp;The chip next to the USB port will have an "O" or an "N" on it - Click the matching button</li>
-	  <li>&nbsp;Select the USB serial option</li>
-	  <li>&nbsp;Wait until the uploaded finishes&nbsp;</li>
-</ol>
+	  <li>The chip next to the USB port will have an "O" or an "N" on it - Click the matching button</li>
+	  <li>If you don't have an N or O on the chip, try "O" first, then "N". Guessing won't hurt anything.</li> 				
+	  <li>Select the USB serial option from the prompt that pops up.</li>
+	  <li>Wait until the uploaded finishes</li>
+	  <li>You're done. Go make some music.</li>
+	</ol>
 	
   <button arduino-uploader hex-href="./uploader/SlightOfHandV1-5-1.hex" board="nano" verify>
     Upload v1.5.1 to Slight Of Hand with N on the chip [<span class="upload-progress"></span>]
@@ -30,7 +32,7 @@ er<!DOCTYPE html>
     Upload v1.5.1 to Slight Of Hand with O on the chip  [<span class="upload-progress"></span>]
   </button>
 
-	<p>Very special thanks to: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for the updater code.</p>
+	<p>Very special thanks to: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for making the updater code.</p>
 
 </body>
 
