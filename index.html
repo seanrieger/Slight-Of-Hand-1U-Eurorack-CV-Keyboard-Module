@@ -4,28 +4,33 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Firmware 1.5.1 Update</title>
+  <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/blob/8fe596f5529610ec7c61fbf2cd57a4c0254ab5fe/main.js"></script>
+  <script src="https://github.com/dbuezas/arduino-web-uploader/releases/download/v1.1.2/main.js"></script>
 </head>
+
 <body>
 <h1>
-   FlatSix Modular Firmaware Uploader (Code by David Buezas)
+   FlatSix Modular Firmaware Uploader 
   </h1>
 	<p>This is a firmware uploaded for arduino-based modules such as Slight Of Hand. It works in Chrome on a Mac or PC.&nbsp;&nbsp;</p>
 	<ol>
 	  <li>Make sure to unplug your module from the eurorack power cable</li>
 	  <li>Plug in your USB cable to the mini usb port on the Slight Of Hand</li>
 	  <li>&nbsp;The chip next to the USB port will have an "O" or an "N" on it - Click the matching button</li>
-	  <li>&nbsp;Select the USB Srrial option</li>
+	  <li>&nbsp;Select the USB serial option</li>
 	  <li>&nbsp;Wait until the uploaded finishes&nbsp;</li>
 </ol>
 	
-<button arduino-uploader hex-href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/releases/download/v1.5.1/SlightOfHandV1-5-1.hex" board="nano" verify> Upload v1.5 to Slight Of Hand with N on the chip [<span class="upload-progress"></span>]</button>
+  <button arduino-uploader hex-href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/releases/download/v1.5.1/SlightOfHandV1-5-1.hex" board="nano" verify>
+    Upload Blink to Slight Of Hand with N on the chip [<span class="upload-progress"></span>]
+  </button>
 <p></p>
-<button arduino-uploader hex-href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/releases/download/v1.5.1/SlightOfHandV1-5-1.hex" board="nanoOldBootloader" verify> Upload v1.5 to Slight Of Hand with O on the chip  [<span class="upload-progress"></span>]</button>
-	
-<p>Very special thanks to David Buezas: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for the updater code.</p>
+<button arduino-uploader hex-href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/releases/download/v1.5.1/SlightOfHandV1-5-1.hex" board="nanoOldBootloader" verify>
+    Upload Blink to Slight Of Hand with O on the chip  [<span class="upload-progress"></span>]
+  </button>
+
+	<p>Very special thanks to: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for the updater code.</p>
 
 </body>
 
