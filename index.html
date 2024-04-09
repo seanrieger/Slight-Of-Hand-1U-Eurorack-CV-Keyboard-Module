@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+er<!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page Title</title>
+  <title>Slight Of Hand Firmware Uploader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://github.com/dbuezas/arduino-web-uploader/releases/download/v1.1.2/main.js"></script>
 </head>
@@ -15,7 +15,7 @@
   </h1>
 	<p>This is a firmware uploaded for arduino-based modules such as Slight Of Hand. It works in Chrome on a Mac or PC.&nbsp;&nbsp;</p>
 	<ol>
-	  <li>Make sure to unplug your module from the eurorack power cable</li>
+	  <li>Make sure to unplug your module from the eurorack power cable first!</li>
 	  <li>Plug in your USB cable to the mini usb port on the Slight Of Hand</li>
 	  <li>&nbsp;The chip next to the USB port will have an "O" or an "N" on it - Click the matching button</li>
 	  <li>&nbsp;Select the USB serial option</li>
@@ -23,11 +23,11 @@
 </ol>
 	
   <button arduino-uploader hex-href="./uploader/SlightOfHandV1-5-1.hex" board="nano" verify>
-    Upload Blink to Slight Of Hand with N on the chip [<span class="upload-progress"></span>]
+    Upload v1.5.1 to Slight Of Hand with N on the chip [<span class="upload-progress"></span>]
   </button>
 <p></p>
 <button arduino-uploader hex-href="./uploader/SlightOfHandV1-5-1.hex" board="nanoOldBootloader" verify>
-    Upload Blink to Slight Of Hand with O on the chip  [<span class="upload-progress"></span>]
+    Upload v1.5.1 to Slight Of Hand with O on the chip  [<span class="upload-progress"></span>]
   </button>
 
 	<p>Very special thanks to: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for the updater code.</p>
