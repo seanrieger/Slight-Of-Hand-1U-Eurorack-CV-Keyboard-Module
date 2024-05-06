@@ -1,3 +1,6 @@
+//Copyright (c) [year] FlatSix Modular. All rights reserved.
+//This software is the property of FlatSix Modular and is protected by copyright law and international treaties. Unauthorized reproduction, distribution, or modification of this software, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law.
+
 #include <Wire.h>
 #include <Adafruit_MCP4725.h>
 #include <EEPROM.h>
