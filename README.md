@@ -52,10 +52,10 @@ desired tuning is achieved.</p>
 <h3>Developer Documentation</h3>
 
 # Slight Of Hand V1.5.3 - Firmware for Nocturne Alchemy Platform
-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 <h3>License</h3>
 
-## Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+### Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
 
 You are free to:
 - Share — copy and redistribute the material in any medium or format
