@@ -60,7 +60,7 @@ desired tuning is achieved.</p>
 
 ## Overview
 
-This firmware is designed for the Nocturne Alchemy Platform, a 1U Eurorack keyboard module by FlatSix Modular. It manages the interaction between a 3x4 button matrix, a digital-to-analog converter (DAC), and various control buttons (e.g., octave shift, calibration mode). The firmware also provides voltage slewing for smooth transitions and supports a calibration mode for fine-tuning the output voltages associated with each note.
+This firmware is designed for the Nocturne Alchemy Platform, a 1U Eurorack keyboard module by FlatSix Modular controlled by the Arduino Nano Microcontroller. It manages the interaction between a 3x4 button matrix, a digital-to-analog converter (DAC), and various control buttons (e.g., octave shift, calibration mode). The firmware also provides voltage slewing for smooth transitions and supports a calibration mode for fine-tuning the output voltages associated with each note.
 
 ### Main Features
 - **Button Matrix Handling**: Detects and processes key presses to generate corresponding voltages.
@@ -71,7 +71,7 @@ This firmware is designed for the Nocturne Alchemy Platform, a 1U Eurorack keybo
 
 ## Hardware Configuration
 
-### Pin Assignments
+### Arduino Nano Pin Assignments
 - **Button Matrix:**
   - Rows: Pins 2, 3, 4
   - Columns: Pins 5, 6, 7, 8
