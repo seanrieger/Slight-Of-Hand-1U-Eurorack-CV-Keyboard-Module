@@ -49,9 +49,8 @@ Initiate Reset: While in Calibration Mode, press and hold the "Octave Down" butt
 Always confirm your adjustments before exiting Calibration Mode to ensure the
 desired tuning is achieved.</p>
 
-<h3>Developer Documentation</h3>
-
-# Slight Of Hand V1.5.3 - Firmware for Nocturne Alchemy Platform
+<h2>Developer Documentation</h2>
+<p></p>I am still working on new firmwares and modules for the Nocture Alchemy Platform, so while I am releasing this as a starter template for those who would like to develop their own firmware, I am unable to provide support for those individual projects.</p 
 
 <h3>License</h3>
 
