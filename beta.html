@@ -44,21 +44,15 @@
 <div class="container">
 
     <div class="row">
-      <!-- First half of the split -->
-      <section class="col-md-6">
+      <!-- Left Column -->
+      <section class="col-md-4">
         <!-- Your first section of code here -->
         <h2>Slight Of Hand</h2>
         <br>
-		<p><img src="uploader/SlightOfHand.svg" alt=""/></p>
-        <p>A 1U (Intellijel format) Eurorack module that functions as a monophonic CV keyboard. It's designed to be extremely playable with responsive, light-touch, tactile switches for keys, a wide portamento/slew range which is adjustable in real-time, as well as octave up and down buttons for maximum performance in a small package.</p>
-        <p><strong>Patch Notes</strong> - This patch optimizes EEPROM usage by detecting and converting the existing calibration data from float to integer. This opens up more space in the EEPROM for upcoming firmwares to use for data storage.&nbsp; <br>
-          <br>
-        This patch also officially releases the firmware as an open source starter template for those who wish to develop their own firmware for the Nocturne Alchemy Platform. Documentation and code available here: <a href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/tree/main">Slight Of Hand GitHub Repository</a>&nbsp; &nbsp; &nbsp; &nbsp;</p>
-<ul>
-        <li><a href="https://flatsixmodular.com/#s-c23181c5-d870-41e2-97f3-a03145e6bd70/">Module&nbsp; Information Page</a></li>
-        <li><a href="https://www.flatsixmodular.com/__static/b39254cddbf9b404f2e0d31c4f535421/slightofhandusermanualeng-firmware-v-1-5-2.pdf?dl=1">Download Manual</a>&nbsp;</li>
-        </ul>
-        <div id="slightofhand">
+		<p><img class="img-fluid" src="uploader/SlightOfHand.svg" alt="Slight Of Hand Module"/></p>
+        <h3> <span data-offset-key="b2lu3-0-0"><span data-text="true">V1.5.3 </span></span><span data-offset-key="b2lu3-0-1"><span data-text="true">Updated: 08/10/2024&nbsp;</span></span></h3>
+        <p><span data-offset-key="b2lu3-0-3"><span data-text="true">This is a firmware upload for the arduino-based module Slight Of Hand. </span></span> </p>
+                <div id="slightofhand">
           <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SlightOfHand_v1-5-3-Stable.hex" board="nano" verify>
     <b>Slight Of Hand v1.5.3</b> (N) [<span class="upload-progress"></span>]
     </button>
@@ -66,29 +60,88 @@
     <b>Slight Of Hand v1.5.3</b> (O) [<span class="upload-progress"></span>]
     </button>
 </div>
+		<h3>New Features:</h3>
+		  <ul>
+          <li>This patch optimizes EEPROM usage by detecting and converting the existing calibration data from float to integer. This opens up more space in the EEPROM for upcoming firmwares to use for data storage.&nbsp;</li>
+          <li>This patch also officially releases the firmware as an open source starter template for those who wish to develop their own firmware for the Nocturne Alchemy Platform. Documentation and code available here: <a href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/tree/main">Slight Of Hand GitHub Repository</a>&nbsp;</li>
+          <li>This firmware can be installed on any module that is a part of the Nocturne Alchemy Platrorm. Firmware v1.5.3 User Manual (With Firmware Flashing Instructions)&nbsp;</li>
+          <li>&nbsp;This patch also officially releases the firmware as an open source starter template for those who wish to develop their own firmware for the Nocturne Alchemy Platform.&nbsp;</li>
+          <li><a href="https://rest.edit.site/filestorage-api-service/89053008ca4c49b9d2a047534b015940/slightofhand-usermanualv-1-5-3.pdf">Firmware 1.5.3 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
+        </ul>
+
+
+
 
       </section>
-      <!-- Second half of the split -->
-      <section class="col-md-6">
+      <!-- Middle Column -->
+      <section class="col-md-4">
         <!-- Your second section of code here -->
         <h2>Arp Of Darkness</h2>
 		<br>
-<p><img src="uploader/ArpOfDarkness.svg" alt=""/></p>
-        <p>The Arp Of Darkness is a 1U (Intellijel format) Eurorack module designed to create dynamic and evolving note sequences. Unlike traditional arpeggiators, which typically play chords as individual notes in a predefined pattern, this module allows you to enter notes sequentially into a buffer of variable length, from 3 up to 16 notes.</p>
-        <p><strong>Patch Notes</strong> - This patch adds Direct Queued Playback Mode Selection, Direct Immediate Playback Mode Selection, as well as Immediate Reset, and Queued (Next gate) Reset fucntions, and a new playback mode called Golden Ratio, which advances the sequencer accroding to the Fibonacci Sequence.(See manual for explanation)</p>
+<p><img class="img-fluid" src="uploader/ArpOfDarkness.svg" alt="Arp Of Darkness Module"/></p>
+        <h3>V1.3.2 BETA : 01/20/2025&nbsp;</h3>
+        <p>          This is a firmware upload for the arduino-based Arp Of Darkness.&nbsp;</p>
+<div id="arpofdarkness">
+        <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ArpOfDarknessV1_3_2_Beta.hex" board="nano" verify>
+    <b>Arp Of Darkness v1.3.2 Beta</b> (N) [<span class="upload-progress"></span>]
+    </button>
+  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ArpOfDarknessV1_3_2_Beta.hex" board="nanoOldBootloader" verify>
+    <b>Arp Of Darkness v1.3.2 Beta</b> (O) [<span class="upload-progress"></span>]
+    </button>
+</div>		  
+        <h3>New Features:</h3>
 <ul>
-          <li><a href="https://www.flatsixmodular.com/#s-9cad7c01-4342-4b65-914f-74bf54a5a75d/">Module Information Page</a></li>
-          <li><a href="https://rest.edit.site/filestorage-api-service/e109906de85d0dfb38ffc3580934ce26/arpofdarkness-usermanualv-1-3-1.pdf">Download Manual&nbsp;</a></li>
+          <li><b>Save sequence&nbsp;</b>- Allows the user to save the current sequence buffer to EEPROM&nbsp;</li>
+        <li><strong>Load saved sequence</strong>- Allows the user to immediately load the saved sequence and begin playback</li>
+        <li><strong>Cued loading of sequence&nbsp; </strong>- Allows the user to cue the sequence to load and playback on the first note of the next loop&nbsp;</li>
+        <li><strong>Clear: </strong>Allow the user to clear the current sequence buffer&nbsp;&nbsp;</li>
+          <li><strong>Boot to sequence:</strong> By default, the Arp Of Darkenss now loads in the saved sequence on startup&nbsp;</li>
+
         </ul>
-        <div id="arpofdarkness">
-          <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ArpOfDarknessV1_3_1Beta.hex" board="nano" verify>
-    <b>Arp Of Darkness v1.3.1-Beta</b> (N) [<span class="upload-progress"></span>]
-    </button>
-  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ArpOfDarknessV1_3_1Beta.hex" board="nanoOldBootloader" verify>
-    <b>Arp Of Darkness v1.3.1-Beta</b> (O) [<span class="upload-progress"></span>]
-    </button>
-</div>
+<h3>&nbsp;Bug Fixes &amp; Enhancments</h3>
+<ul>
+  <li>Fixed bug with Octave down long-press to shift playback modes not supressing the octave shift causing accidental octave down shifting.&nbsp; &nbsp;&nbsp;</li>
+  <li><a href="https://drive.google.com/file/d/1HyxOVkJMfZFnvjBWLOA9duvfGBWO5rdr/view?usp=sharing">Firmware 1.3.2 User Manual (With Firmware Flashing Instructions)</a>&nbsp;</li>
+</ul>
+<p>&nbsp;</p>
+<!-- PLACEHOLDER -->
       </section>
+		
+		
+      <!-- Right Column -->
+      <section class="col-md-4">
+        <!-- Your second section of code here -->
+        <h2>Seventh Summoner</h2>
+		<br>
+<p><img class="img-fluid" src="uploader/SeventhSummoner.svg" alt="Seventh Summoner Module"/></p>
+        <h3>V1.0.0 Updated: 12/29/2024&nbsp;</h3>
+        <p>          This is the first firmware upload for the arduino-based Seventh Summoner.&nbsp;</p>
+<div id="SeventhSummoner">
+        <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SeventhSummonerV1-0-0.hex" board="nano" verify>
+    <b>Seventh Summoner v1.0.0</b> (N) [<span class="upload-progress"></span>]
+    </button>
+  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SeventhSummonerV1-0-0.hex" board="nanoOldBootloader" verify>
+    <b>Seventh Summoner v1.0.0&nbsp;</b> (O) [<span class="upload-progress"></span>]
+    </button>
+</div>		  
+        <h3>Features:</h3>
+        <ul>
+          <li>Four octaves of control from C0 to C4&nbsp;</li>
+          <li>Six 32-note sequences&nbsp;</li>
+          <li>16-step Summoner Sequence to chain and manipulate the six normal sequences&nbsp;</li>
+          <li>Five playback modes (Forward, Backward, Pingpong, Golden Ratio and Random) with direct select, (queued &amp; immediate) and reset&nbsp;</li>
+          <li>EEPROM Storage for saving of all sequence data</li>
+          <li>&nbsp;Clock input and CV out calibrated to 1V/0&nbsp;</li>
+          <li>Calibration mode with tuning for each note across 4 octaves (Comes pre-calibrated)</li>
+        </ul>
+
+
+ <!-- <a href="https://rest.edit.site/filestorage-api-service/e109906de85d0dfb38ffc3580934ce26/arpofdarkness-usermanualv-1-3-1.pdf">Firmware 1.0.0 User Manual (With Firmware Flashing Instructions)</a>&nbsp; -->
+<p>&nbsp;</p>
+<!-- PLACEHOLDER -->
+      </section>
+		
+		
 	    <p>Very special thanks to: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for making the updater code.</p>
   </div>
 </div>
