@@ -50,23 +50,23 @@
         <h2>Slight Of Hand</h2>
         <br>
 		<p><img class="img-fluid" src="uploader/SlightOfHand.svg" alt="Slight Of Hand Module"/></p>
-        <h3> <span data-offset-key="b2lu3-0-0"><span data-text="true">V1.5.3 </span></span><span data-offset-key="b2lu3-0-1"><span data-text="true">Updated: 08/10/2024&nbsp;</span></span></h3>
+        <h3> <span data-offset-key="b2lu3-0-0"><span data-text="true">V1.5.4 </span></span><span data-offset-key="b2lu3-0-1"><span data-text="true">Updated: 01/24/2026&nbsp;</span></span></h3>
         <p><span data-offset-key="b2lu3-0-3"><span data-text="true">This is a firmware upload for the arduino-based module Slight Of Hand. </span></span> </p>
                 <div id="slightofhand">
-          <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SlightOfHand_v1-5-3-Stable.hex" board="nano" verify>
-    <b>Slight Of Hand v1.5.3</b> (N) [<span class="upload-progress"></span>]
+          <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SlightOfHand_v1-5-4-Stable.hex" board="nano" verify>
+    <b>Slight Of Hand v1.5.4</b> (N) [<span class="upload-progress"></span>]
     </button>
-  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SlightOfHand_v1-5-3-Stable.hex" board="nanoOldBootloader" verify>
-    <b>Slight Of Hand v1.5.3</b> (O) [<span class="upload-progress"></span>]
+  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SlightOfHand_v1-5-4-Stable.hex" board="nanoOldBootloader" verify>
+    <b>Slight Of Hand v1.5.4</b> (O) [<span class="upload-progress"></span>]
     </button>
 </div>
-		<h3>New Features:</h3>
+		<h3>Bug Fixes &amp; Enhancments:</h3>
 		  <ul>
-          <li>This patch optimizes EEPROM usage by detecting and converting the existing calibration data from float to integer. This opens up more space in the EEPROM for upcoming firmwares to use for data storage.&nbsp;</li>
-          <li>This patch also officially releases the firmware as an open source starter template for those who wish to develop their own firmware for the Nocturne Alchemy Platform. Documentation and code available here: <a href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/tree/main">Slight Of Hand GitHub Repository</a>&nbsp;</li>
-          <li>This firmware can be installed on any module that is a part of the Nocturne Alchemy Platrorm. Firmware v1.5.3 User Manual (With Firmware Flashing Instructions)&nbsp;</li>
-          <li>&nbsp;This patch also officially releases the firmware as an open source starter template for those who wish to develop their own firmware for the Nocturne Alchemy Platform.&nbsp;</li>
-          <li><a href="https://rest.edit.site/filestorage-api-service/89053008ca4c49b9d2a047534b015940/slightofhand-usermanualv-1-5-3.pdf">Firmware 1.5.3 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
+            <li><strong>The portamento control has been optimized</strong> to feel more musical with 70% of the potentiometer dedicated to the faster portamento speeds and 30% of the knob dedicated to ultra slow experimental speeds. It's a feel thing.&nbsp;</li>
+            <li><strong>Fixed a bug</strong> that could lead in rare occasions to the module calibration de-calibrating &nbsp;</li>
+            <li>This patch primarily is a <strong>code optimization</strong> to allow the firmware to run more efficiently as well as to simplify development for open source developers wishing to modify the code.  &nbsp;</li>
+<li> <a href="https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/tree/main">Slight Of Hand GitHub Repository</a>&nbsp;</li>
+          <li><a href="https://rest.edit.site/filestorage-api-service/89053008ca4c49b9d2a047534b015940/slightofhand-usermanualv-1-5-3.pdf">Firmware 1.5.4 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
         </ul>
 
 
@@ -98,7 +98,7 @@
           <li><strong>Boot to sequence:</strong> By default, the Arp Of Darkenss now loads in the saved sequence on startup&nbsp;</li>
 
         </ul>
-<h3>&nbsp;Bug Fixes &amp; Enhancments</h3>
+<h3>&nbsp;Bug Fixes &amp; Enhancments:</h3>
 <ul>
   <li>Fixed bug with Octave down long-press to shift playback modes not supressing the octave shift causing accidental octave down shifting.&nbsp; &nbsp;&nbsp;</li>
   <li><a href="https://drive.google.com/file/d/1MS-7iPzdtaOeB5z8hnXPzBT5Yj8Hj4cP/view?usp=drive_link">Firmware 1.3.2 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
@@ -124,11 +124,11 @@
     <b>Seventh Summoner v1.1.0&nbsp;</b> (O) [<span class="upload-progress"></span>]
     </button>
 </div>		  
-        <h3>Features:</h3>
+        <h3>New Features:</h3>
         <ul>
           <li>New "Slight Of Hand" mode - Allows the user to boot into a CV Keyboard mode that functions like the Slight Of Hand module by simply holding the Shift/High C button during power on and boot. &nbsp;</li>
         </ul>
-		<h3>Bug Fixes &amp; Enhancments</h3>
+		<h3>Bug Fixes &amp; Enhancments:</h3>
 		<ul>
 		  <li>Fixed a critical bug where in rare occurances calibration data could be corrupted and zeroed out due to EEPROM protected address being overwritten resulting in user having to recalibrate the module&nbsp;</li>
 		  <li><a href="https://drive.google.com/file/d/16Pa9mtP0_f8jYMcTW8WalWJ3UXZKYLAh/view?usp=sharing">Firmware 1.1.0 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
