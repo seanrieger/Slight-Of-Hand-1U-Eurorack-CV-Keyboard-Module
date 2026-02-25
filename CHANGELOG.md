@@ -214,16 +214,5 @@ The firmware includes checks to prevent accidental corruption of calibration dat
 
 ---
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
-
-- Reporting bugs
-- Suggesting enhancements
-- Submitting pull requests
-- Code style guidelines
-
----
-
 **Last Updated:** 2025-01-19  
 **Maintainer:** Sean Rieger / FlatSix Modular

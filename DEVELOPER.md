@@ -19,7 +19,7 @@
 Slight Of Hand is part of the Nocturne Alchemy Platform, which means:
 
 - **Shared hardware** across multiple firmware variants
-- **Shared calibration system** (CalibrationMode.h/.cpp)
+- **Shared calibration system** (CalibrationMode.h/.cpp) - IMPORTANT, other Nocturne Alchemy Platform firmwares use these .h and .cpp files. If you make changes to these, can cause real issues when someone flashes a different firmware if you change EEPROM locations.
 - **Shared EEPROM handling** (EEPROMHandling.h/.cpp)
 - **Swappable firmware** via web uploader or Arduino IDE
 
