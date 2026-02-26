@@ -8,11 +8,24 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css">
-	  .redbutton {background-color: red; border-color: red; padding: 25px; margin: 25px; display: block}
+	  .redbutton {
+	background-color: red;
+	border-color: red;
+	padding-top: 9px;
+	padding-right: 9px;
+	padding-left: 9px;
+	padding-bottom: 9px;
+	margin-top: 15px;
+	margin-right: 15px;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	display: block
+}
 	  header{	background-color: black; display: block; padding: 50px;	margin-bottom: 45px;}
 	  header h1{font-size: 3em; color: white; font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif"}
 	  header h2{font-size: 1.4em; color: white; font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif"}
-	  .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {  color: #fff;  background-color: #000000;  border-color: #000000; /*set the color you want here*/ </style>
+	  .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {  color: #fff;  background-color: #000000;  border-color: #000000; /*set the color you want here*/ 
+  </style>
 <script src="https://github.com/dbuezas/arduino-web-uploader/releases/download/v1.1.2/main.js"></script>
   <!-- Optional Bootstrap JavaScript; put it at the end of your document -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,9 +38,18 @@
     </header>
 </div>
 <div class="container">
-	<section>
+	<div class="row">
+	<section class="col-md-6">
       <p>Introducing the Nocturne Alchemy Platform – a flexible eurorack module series that redefines versatility and creativity. Each module within the Nocturne Alchemy Platform shares the same robust Arduino-based hardware, allowing you to effortlessly swap functionalities through our intuitive web firmware loader. By purchasing one module, you gain access to the full range of available firmwares, including our current creations, Slight of Hand and Arp Of Darkness as well as others that are planned for future release! This innovative approach means your module can evolve with your music, with new and exciting functionalities just a simple firmware update away. Embrace the magic of endless possibilities with the Nocturne Alchemy Platform.&nbsp;</p>
-      <p>This is a firmware uploader for Nocturne Alchemy Platform&nbsp; modules such as Slight Of Hand and Arp Of Darkness. It only works in Chrome on a Mac or PC. You will need a USB-A to USB Mini cable. If you don't have one laying around, you can find many <a href="https://www.amazon.com/AmazonBasics-USB-2-0-Cable-Male/dp/B00NH13S44?th=1" target="new">inexpensive ones on Amazon</a> &nbsp;&nbsp;</p>
+		
+		<p>This is a firmware uploader for Nocturne Alchemy Platform&nbsp; modules such as Slight Of Hand and Arp Of Darkness. It only works in Chrome on a Mac or PC. You will need a USB-A to USB Mini cable. If you don't have one laying around, you can find many <a href="https://www.amazon.com/AmazonBasics-USB-2-0-Cable-Male/dp/B00NH13S44?th=1" target="new">inexpensive ones on Amazon</a></p>
+	  </section>
+	  <section class="col-md-6">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/FPixJvwB6HY?si=5AYuhEayDUvd9XHh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</section>
+  </div> 
+	<section>	
+		
 		<p><b>Read through all the steps below before you update the firmware.</b></p>
     <ol>
       <li>Make sure to unplug your module from the Eurorack power cable first.</li>
@@ -35,8 +57,8 @@
       <li>The chip next to the USB port will have an "O" or an "N" on it - Make note of this.</li>
       <li>If you don't have an N or O on the chip, try "O" first, then "N". Guessing won't hurt anything. (The update will just fail. If so, choose the other one. It has to be one of them.)</li>
       <li>Click on the button for the firmware you wish to update with the correct letter on it.&nbsp;</li>
-<li>Select the USB serial option from the prompt that pops up.</li>
-      <li>Wait until the uploaded finishes</li>
+      <li>Select the USB serial option from the prompt that pops up. (Sometimes, when other USB devices are plugged in it take a few tries)</li>
+<li>Wait until the uploaded finishes</li>
       <li>You're done. Unplug from the USB cable, plug in the power, and go make some music.</li>
     </ol>
 	</section>
@@ -45,12 +67,12 @@
 
     <div class="row">
       <!-- Left Column -->
-      <section class="col-md-4">
+      <section class="col-md-3">
         <!-- Your first section of code here -->
         <h2>Slight Of Hand</h2>
         <br>
 		<p><img class="img-fluid" src="uploader/SlightOfHand.svg" alt="Slight Of Hand Module"/></p>
-        <h3> <span data-offset-key="b2lu3-0-0"><span data-text="true">V1.5.4 </span></span><span data-offset-key="b2lu3-0-1"><span data-text="true">Updated: 01/24/2026&nbsp;</span></span></h3>
+        <h3> <span data-offset-key="b2lu3-0-0"><span data-text="true">V1.5.4 </span></span><span data-offset-key="b2lu3-0-1"><span data-text="true">- 01/24/2026&nbsp;</span></span></h3>
         <p><span data-offset-key="b2lu3-0-3"><span data-text="true">This is a firmware upload for the arduino-based module Slight Of Hand. </span></span> </p>
                 <div id="slightofhand">
           <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SlightOfHand_v1-5-4-Stable.hex" board="nano" verify>
@@ -60,7 +82,7 @@
     <b>Slight Of Hand v1.5.4</b> (O) [<span class="upload-progress"></span>]
     </button>
 </div>
-		<h3>Bug Fixes &amp; Enhancments:</h3>
+		<h3 style="">Bug Fixes &amp; Enhancments:</h3>
 		  <ul>
             <li><strong>The portamento control has been optimized</strong> to feel more musical with 70% of the potentiometer dedicated to the faster portamento speeds and 30% of the knob dedicated to ultra slow experimental speeds. It's a feel thing.&nbsp;</li>
             <li><strong>Fixed a bug</strong> that could lead in rare occasions to the module calibration de-calibrating &nbsp;</li>
@@ -74,12 +96,12 @@
 
       </section>
       <!-- Middle Column -->
-      <section class="col-md-4">
+      <section class="col-md-3">
         <!-- Your second section of code here -->
         <h2>Arp Of Darkness</h2>
 		<br>
 <p><img class="img-fluid" src="uploader/ArpOfDarkness.svg" alt="Arp Of Darkness Module"/></p>
-        <h3>V1.3.2   02/25/2025&nbsp;</h3>
+        <h3>V1.3.2 - 02/25/2025&nbsp;</h3>
         <p>          This is a firmware upload for the arduino-based Arp Of Darkness.&nbsp;</p>
 <div id="arpofdarkness">
         <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ArpOfDarknessV1_3_2_Beta.hex" board="nano" verify>
@@ -109,12 +131,12 @@
 		
 		
       <!-- Right Column -->
-       <section class="col-md-4">
+       <section class="col-md-3">
         <!-- Your second section of code here -->
         <h2>Seventh Summoner</h2>
 		<br>
 <p><img class="img-fluid" src="uploader/SeventhSummoner.svg" alt="Seventh Summoner Module"/></p>
-        <h3>V1.1.0 :  09/07/2025&nbsp;</h3>
+        <h3>V1.1.0 - 09/07/2025&nbsp;</h3>
         <p>          This is the latest firmware upload for the arduino-based Seventh Summoner.&nbsp;</p>
 <div id="SeventhSummoner">
         <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/SeventhSummonerv1-1-0-Beta.hex" board="nano" verify>
@@ -139,6 +161,35 @@
 <p>&nbsp;</p>
 <!-- PLACEHOLDER -->
       </section>
+
+<!-- Right Column -->
+      <section class="col-md-3">
+        <!-- Your second section of code here -->
+        <h2>Shroud Of Turing</h2>
+		<br>
+<p><img class="img-fluid" src="uploader/ShroudOfTuring.svg" alt="Seventh Summoner Module"/></p>
+        <h3>V1.2.0 - 02/25/2026&nbsp;</h3>
+        <p>          This is the latest firmware upload for the arduino-based Shroud Of Turing.&nbsp;</p>
+<div id="ShroudOfTuring">
+        <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ShroudOfTuring_v1-2-0-Stable.hex" board="nano" verify>
+    <b>Shroud Of Turing v1.2.0</b> (N) [<span class="upload-progress"></span>]
+    </button>
+  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ShroudOfTuring_v1-2-0-Stable.hex" board="nanoOldBootloader" verify>
+    <b>Shroud Of Turing v1.2.0</b> (O) [<span class="upload-progress"></span>]
+    </button>
+</div>		  
+        <h3>New Features:</h3>
+        <ul>
+          <li>The Shroud of Turing is a 16-bit performance-focused shift register sequencer with musical quantization, inspired by the Turing Machine. It generates pseudo-random CV sequences that can lock into repeating patterns or evolve over time. What sets it apart is the ability to quantize output to custom scales built from the included keyboard, with six memory slots for saving and recalling your favorite scales in real-time.</li>
+		<li><a href="https://drive.google.com/file/d/1jSNkt3ewQHmfnlBp57IaFHBI-bqnCINJ/view?usp=drive_link">Firmware v1.2.0 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
+		</ul>
+		  <p>&nbsp;</p>
+
+ <!-- <a href="https://rest.edit.site/filestorage-api-service/e109906de85d0dfb38ffc3580934ce26/arpofdarkness-usermanualv-1-3-1.pdf">Firmware 1.0.0 User Manual (With Firmware Flashing Instructions)</a>&nbsp; -->
+<p>&nbsp;</p>
+<!-- PLACEHOLDER -->
+      </section>
+		
 		
 		
 	    <p>Very special thanks to: <a href="https://github.com/dbuezas/arduino-web-uploader">https://github.com/dbuezas/arduino-web-uploader</a> for making the updater code.</p>
