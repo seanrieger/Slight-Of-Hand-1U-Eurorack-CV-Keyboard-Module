@@ -154,20 +154,32 @@
         <h2>Shroud Of Turing</h2>
 		<br>
 <p><img class="img-fluid" src="uploader/ShroudOfTuring.svg" alt="Seventh Summoner Module"/></p>
-        <h3>V1.2.0 BETA:  02/25/2026&nbsp;</h3>
+        <h3>V1.2.4 BETA:  05/01/2026&nbsp;</h3>
         <p>          This is BETA firmware for the arduino-based Shroud Of Turing.&nbsp;</p>
 <div id="ShroudOfTuring">
-        <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ShroudOfTuring_v1-2-0-Stable.hex" board="nano" verify>
+        <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ShroudOfTuring_v1-2-4-Beta.hex" board="nano" verify>
     <b>Shroud Of Turing v1.2.0</b> (N) [<span class="upload-progress"></span>]
     </button>
-  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ShroudOfTuring_v1-2-0-Stable.hex" board="nanoOldBootloader" verify>
+  <button type="button" class="btn btn-primary redbutton" arduino-uploader hex-href="./uploader/ShroudOfTuring_v1-2-4-Beta.hex" board="nanoOldBootloader" verify>
     <b>Shroud Of Turing v1.2.0</b> (O) [<span class="upload-progress"></span>]
     </button>
 </div>		  
         <h3>New Features:</h3>
         <ul>
-          <li>The Shroud of Turing is a 16-bit performance-focused shift register sequencer with musical quantization, inspired by the Turing Machine. It generates pseudo-random CV sequences that can lock into repeating patterns or evolve over time. What sets it apart is the ability to quantize output to custom scales built from the included keyboard, with six memory slots for saving and recalling your favorite scales in real-time.</li>
-		<li><a href="https://drive.google.com/file/d/1jSNkt3ewQHmfnlBp57IaFHBI-bqnCINJ/view?usp=drive_link">Firmware v1.2.0 User Manual (With Firmware Flashing Instructions)&nbsp;</a></li>
+          <li>Added 5 state save/load slots mapped to black keys (C#/D#/F#/G#/A#)&nbsp;</li>
+			  <ul><li>&nbsp;Octave Down + black key saves full module state to EEPROM slot&nbsp;</li>
+			  <li>&nbsp;Octave Up + black key loads state from EEPROM slot&nbsp;</li>
+			  <li>Each slot stores: shift register, step length, voltage range, pot value, scale, and rotation offset (12 bytes per slot)&nbsp;</li>
+			  <li>Pot pickup behavior after load prevents jarring probability jumps</li>
+			  </ul>
+			</ul>
+		  <p>&nbsp;</p>
+		  
+		  <h3>Bug Fixes &amp; Enhancements:</h3>
+        <ul>
+          <li>The rotate forward and rotate backward functions have been optimized to function more how the user expects with the post-quantized values being used for the rotation instead of shift register values.</li>
+          <li>Fix a bug that in some cases could cause the reset to trigger double notes on the first note of the reset&nbsp;&nbsp;</li>
+<li><strong>Updated Manual coming soon!&nbsp;</strong></li>
 		</ul>
 		  <p>&nbsp;</p>
 
