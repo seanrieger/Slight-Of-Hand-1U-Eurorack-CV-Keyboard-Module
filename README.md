@@ -42,9 +42,9 @@ This firmware is optimized for performance and musical expression, with a carefu
 
 For complete documentation, see the other files in this directory:
 
-- **QUICK_REFERENCE.md** - One-page user guide
-- **DEVELOPER.md** - Technical deep dive
-- **CONTRIBUTING.md** - How to contribute
+- **docs/QUICK_REFERENCE.md** - One-page user guide
+- **docs/DEVELOPER.md** - Technical deep dive
+- **docs/CONTRIBUTING.md** - How to contribute
 - **CHANGELOG.md** - Version history
 
 ## Quick Start
@@ -149,4 +149,4 @@ Full license: http://creativecommons.org/licenses/by-nc/4.0/
 
 
 
-Check the Wiki for More Info: https://github.com/seanrieger/Slight-Of-Hand-1U-Eurorack-CV-Keyboard-Module/wiki
+Check the Wiki for More Info: https://github.com/seanrieger/slight-of-hand/wiki
